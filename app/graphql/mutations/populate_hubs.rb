@@ -13,8 +13,6 @@ module Mutations
               next
             end
 
-            puts row.inspect
-
             row.map! { |data| data.nil? ? data : data.encode('UTF-8', invalid: :replace, undef: :replace) }
 
             coordinates = row[10]
@@ -29,6 +27,7 @@ module Mutations
               sub_div: row[5],
               function: row[6],
               status: row[7],
+              # TODO: Properly parse date
               date: row[8],
               iata: row[9],
               coordinates:  lat_lng.nil? ? nil : ActiveRecord::Point.new(lat_lng[0], lat_lng[1]),
