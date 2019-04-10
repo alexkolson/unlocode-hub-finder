@@ -15,7 +15,7 @@ module Mutations
 
             puts row.inspect
 
-            row.map! { |data| data.nil? ? data : data.encode('utf-8', invalid: :replace, undef: :replace) }
+            row.map! { |data| data.nil? ? data : data.encode('UTF-8', invalid: :replace, undef: :replace) }
 
             coordinates = row[10]
 
