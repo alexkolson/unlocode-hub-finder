@@ -13,10 +13,7 @@ module Mutations
               next
             end
 
-            puts row.inspect
-
-            ## TODO: Try perhaps force_encoding utf-8?
-            row.map! { |data| data.nil? ? data : data.encode('UTF-8', invalid: :replace, undef: :replace) }
+            row.map! { |data| data.nil? ? data : data.force_encoding('iso-8859-1').encode('utf-8') }
 
             coordinates = row[10]
 
