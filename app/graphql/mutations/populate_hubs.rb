@@ -27,9 +27,7 @@ module Mutations
               sub_div: row[5],
               function: row[6],
               status: row[7],
-              # TODO: Properly parse date
-              # YYMM
-              date: row[8],
+              date: Date.strptime(row[8] '%y%m'),
               iata: row[9],
               # TODO: Use Haversine formula/gem to get nearest distances
               coordinates:  lat_lng.nil? ? nil : ActiveRecord::Point.new(lat_lng[0], lat_lng[1]),
