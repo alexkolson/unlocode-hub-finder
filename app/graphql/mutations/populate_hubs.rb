@@ -13,6 +13,9 @@ module Mutations
               next
             end
 
+            puts row.inspect
+
+            ## TODO: Try perhaps force_encoding utf-8?
             row.map! { |data| data.nil? ? data : data.encode('UTF-8', invalid: :replace, undef: :replace) }
 
             coordinates = row[10]
@@ -21,15 +24,17 @@ module Mutations
 
             hub_items << Hub.new(
               ch: row[0],
-              locode: "#{row[1]}#{row[2]}",
+              locode: "#{row[1]} #{row[2]}",
               name: row[3],
               name_wo_diacritics: row[4],
               sub_div: row[5],
               function: row[6],
               status: row[7],
               # TODO: Properly parse date
+              # YYMM
               date: row[8],
               iata: row[9],
+              # TODO: Use Haversine formula/gem to get nearest distances
               coordinates:  lat_lng.nil? ? nil : ActiveRecord::Point.new(lat_lng[0], lat_lng[1]),
               remarks: row[11]
             )
