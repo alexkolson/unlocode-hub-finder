@@ -7,7 +7,11 @@ module Types
       argument :page_size, Int, required: false
     end
 
-    # TODO: haversine
+    field :nearest_hub, HubType, null: false do
+      argument :lat, Float, required: true
+      argument :lng, Float, required: true
+    end
+
     def hubs(filter: nil, order: nil, page: 1, page_size: 10)
       if filter.nil?
         @hubs = Hub.all
@@ -39,13 +43,16 @@ module Types
 
       total_hubs = current_page.total_count
 
-
       {
         page: current_page,
         next_page: next_page,
         total_pages: total_pages,
         total_hubs: total_hubs
       }
+    end
+
+    def nearest_hub(lat:, lng:)
+      Hub.closest(origin: [lat, lng])
     end
     
     private

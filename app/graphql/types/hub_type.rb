@@ -10,7 +10,8 @@ module Types
     field :status, String, null: true
     field :date, ISO8601DateType, null: true
     field :iata, String, null: true
-    field :coordinates, PointType, null: true
+    field :lat, Float, null: true,
+    field :lng, Float, null: true,
     field :remarks, String, null: true
   end
 end

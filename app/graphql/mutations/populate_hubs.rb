@@ -24,7 +24,7 @@ module Mutations
 
             coordinates = row[10]
 
-            lat_lng = CoordinateConverter.lat_lng_from_locode_coord_str(coordinates)
+            lat, lng = CoordinateConverter.lat_lng_from_locode_coord_str(coordinates)
 
             hub_items << Hub.new(
               ch: row[0],
@@ -36,8 +36,8 @@ module Mutations
               status: row[7],
               date: parse_date(row[8]),
               iata: row[9],
-              # TODO: Use Haversine formula/gem to get nearest distances
-              coordinates:  lat_lng.nil? ? nil : ActiveRecord::Point.new(lat_lng[0], lat_lng[1]),
+              lat: lat,
+              lng: lng,
               remarks: row[11]
             )
           end
