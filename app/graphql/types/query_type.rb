@@ -7,9 +7,13 @@ module Types
       argument :page_size, Int, required: false
     end
 
-    field :nearest_hub, HubType, null: false do
+    field :nearest_hub_to_coordinates, HubType, null: false do
       argument :lat, Float, required: true
       argument :lng, Float, required: true
+    end
+
+    field :nearest_hub_to_address, HubType, null: false do
+      argument :address, String, required: true
     end
 
     def hubs(filter: nil, order: nil, page: 1, page_size: 10)
@@ -51,10 +55,14 @@ module Types
       }
     end
 
-    def nearest_hub(lat:, lng:)
-      Hub.closest(origin: [lat, lng])
+    def nearest_hub_to_coordinates(lat:, lng:)
+      Hub.closest(origin: [lat, lng]).first
     end
-    
+
+    def nearest_hub_to_address(address:)
+      Hub.closest(origin: address).first
+    end
+
     private
 
     def error_if_not_hub_column_name(key_type:, key:)

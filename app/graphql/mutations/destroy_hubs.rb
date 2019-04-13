@@ -13,7 +13,7 @@ module Mutations
         errors.push('No Hubs in database to destroy.')
       else
         begin
-          Hub.destroy_all
+          Hub.delete_all
         rescue => e
           Rails.logger.error e
           success = false
