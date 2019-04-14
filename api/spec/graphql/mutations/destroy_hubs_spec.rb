@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 describe Mutations::DestroyHubs do
-  before :all do
+  after :all do
     Hub.delete_all
   end
 
   context 'Database has existing hubs' do
     before :each do
+      Hub.delete_all
       HubCSVImporter.import
     end
     it 'succesfully destroys all hubs in DB' do
@@ -26,6 +27,10 @@ describe Mutations::DestroyHubs do
   end
 
   context 'Database is empty' do
+    before :each do
+      Hub.delete_all
+    end
+
     it 'fails to destroy any hubs in DB because there are none' do
       destroy_hubs_graphql = <<-GRAPHQL
         mutation {

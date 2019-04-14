@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 describe Mutations::PopulateHubs do
+  after :all do
+    Hub.delete_all
+  end
+
   context 'Database has existing hubs' do
     before :each do
       Hub.delete_all
