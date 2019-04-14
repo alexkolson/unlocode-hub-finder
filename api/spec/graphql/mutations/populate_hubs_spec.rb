@@ -21,11 +21,11 @@ describe Mutations::PopulateHubs do
         }
       GRAPHQL
 
-      @mutation_result = HubFinderApiSchema.execute populate_hubs_graphql
+      mutation_result = HubFinderApiSchema.execute populate_hubs_graphql
 
-      expect(@mutation_result['data']['populateHubs']['success']).to be false
-      expect(@mutation_result['data']['populateHubs']['errors'].length).to be 1
-      expect(@mutation_result['data']['populateHubs']['errors'].first).to eq 'Hubs present in database. Database must be empty in order for this mutation to succeed.'
+      expect(mutation_result['data']['populateHubs']['success']).to be false
+      expect(mutation_result['data']['populateHubs']['errors'].length).to be 1
+      expect(mutation_result['data']['populateHubs']['errors'].first).to eq 'Hubs present in database. Database must be empty in order for this mutation to succeed.'
     end
   end
 
@@ -44,10 +44,10 @@ describe Mutations::PopulateHubs do
         }
       GRAPHQL
 
-      @mutation_result = HubFinderApiSchema.execute populate_hubs_graphql
+      mutation_result = HubFinderApiSchema.execute populate_hubs_graphql
 
-      expect(@mutation_result['data']['populateHubs']['success']).to be true
-      expect(@mutation_result['data']['populateHubs']['errors'].length).to be 0
+      expect(mutation_result['data']['populateHubs']['success']).to be true
+      expect(mutation_result['data']['populateHubs']['errors'].length).to be 0
     end
   end
 end

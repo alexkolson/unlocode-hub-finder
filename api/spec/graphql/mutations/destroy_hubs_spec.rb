@@ -19,10 +19,12 @@ describe Mutations::DestroyHubs do
           }
         }
       GRAPHQL
-      expect { @mutation_result = HubFinderApiSchema.execute destroy_hubs_graphql }.not_to raise_error
 
-      expect(@mutation_result['data']['destroyHubs']['success']).to be true
-      expect(@mutation_result['data']['destroyHubs']['errors'].length).to be 0
+      mutation_result = nil
+
+      expect { mutation_result = HubFinderApiSchema.execute destroy_hubs_graphql }.not_to raise_error
+      expect(mutation_result['data']['destroyHubs']['success']).to be true
+      expect(mutation_result['data']['destroyHubs']['errors'].length).to be 0
     end
   end
 
@@ -31,7 +33,7 @@ describe Mutations::DestroyHubs do
       Hub.delete_all
     end
 
-    it 'fails to destroy any hubs in DB because there are none' do
+    it 'fails to destroy any hubs in DB' do
       destroy_hubs_graphql = <<-GRAPHQL
         mutation {
           destroyHubs {
@@ -40,11 +42,13 @@ describe Mutations::DestroyHubs do
           }
         }
       GRAPHQL
-      expect { @mutation_result = HubFinderApiSchema.execute destroy_hubs_graphql }.not_to raise_error
 
-      expect(@mutation_result['data']['destroyHubs']['success']).to be false
-      expect(@mutation_result['data']['destroyHubs']['errors'].length).to be 1
-      expect(@mutation_result['data']['destroyHubs']['errors'].first).to eq 'No Hubs in database to destroy.'
+      mutation_result = nil
+
+      expect { mutation_result = HubFinderApiSchema.execute destroy_hubs_graphql }.not_to raise_error
+      expect(mutation_result['data']['destroyHubs']['success']).to be false
+      expect(mutation_result['data']['destroyHubs']['errors'].length).to be 1
+      expect(mutation_result['data']['destroyHubs']['errors'].first).to eq 'No Hubs in database to destroy.'
     end
   end
 end
