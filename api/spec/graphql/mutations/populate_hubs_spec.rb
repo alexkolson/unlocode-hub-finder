@@ -34,7 +34,7 @@ describe Mutations::PopulateHubs do
       Hub.delete_all
     end
 
-    it 'successfully populates all hubs into the DB' do
+    it 'successfully populates all hubs into DB' do
       populate_hubs_graphql = <<-GRAPHQL
         mutation {
           populateHubs {
