@@ -46,5 +46,4 @@ describe Mutations::PopulateHubs do
       expect(@mutation_result['data']['populateHubs']['errors'].length).to be 0
     end
   end
-
 end

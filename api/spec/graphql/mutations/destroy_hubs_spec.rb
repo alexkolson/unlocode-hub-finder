@@ -42,5 +42,4 @@ describe Mutations::DestroyHubs do
       expect(@mutation_result['data']['destroyHubs']['errors'].first).to eq 'No Hubs in database to destroy.'
     end
   end
-
 end
