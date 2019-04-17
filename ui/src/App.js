@@ -8,6 +8,18 @@ const client = new ApolloClient({
 });
 
 
+const GET_HUBS = gql`
+{
+  hubs {
+    page {
+      name,
+      lat,
+      lng
+    }
+  }
+}
+`
+
 class App extends Component {
   render() {
     return (
