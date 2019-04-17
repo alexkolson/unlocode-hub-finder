@@ -23,7 +23,12 @@ const GET_HUBS = gql`
 class App extends Component {
   render() {
     return (
-      <Query query={GET_HUBS} >
+      <Query client={client} query={GET_HUBS} >
+        {({ loading, error, data }) => {
+          if (loading) return <h1>Loading....</h1>
+          if (error) return <h1 style="color: red;">Error loading nubs</h1>
+          return <textarea>{JSON.stringify(data, null, 2)}</textarea>
+        }}
       </Query>
     );
   }
