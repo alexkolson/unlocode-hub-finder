@@ -22,7 +22,13 @@ module Types
       else 
         # Prevent SQL Injection by only allowing filter keys that are column names.
         error_if_not_hub_column_name key_type: 'filter', key: filter[:key]
-        @hubs = Hub.where("#{filter[:key]} ILIKE ?", "%#{filter[:value]}%")
+
+        # ids arent something we can use ILIKE on. They must be an exact match.
+        if filter[:key] == "id"
+          @hubs = Hub.where(id: filter[:value])
+        else
+          @hubs = Hub.where("#{filter[:key]} ILIKE ?", "%#{filter[:value]}%")
+        end
       end
 
       current_page = @hubs
