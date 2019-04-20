@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Fragment, Component } from 'react';
 
 import ApolloClient, { gql } from 'apollo-boost';
 import { Query, Mutation } from 'react-apollo';
@@ -151,25 +151,25 @@ class App extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <Fragment>
         <h1>Controls</h1>
         <h2>Data Controls</h2>
         <Mutation mutation={POPULATE_HUBS} client={client} refetchQueries={[{ query: GET_HUBS, variables: this.state.queryVariables }]}>
           {(populateHubs, { loading, error }) => (
-            <React.Fragment>
+            <Fragment>
               <button onClick={populateHubs}>Populate Hubs</button>
-              {loading && <p>Populating Hubs....</p>}
+              {loading && <p>Populating Hubs...This could take some time. This message will disappear when hubs are populated. You will also then see data in the table below.</p>}
               {error && <p style={{ color: 'red' }}> Error: {error} :( Please try again</p>}
-            </React.Fragment>
+            </Fragment>
           )}
         </Mutation>
         <Mutation mutation={DELETE_HUBS} client={client} refetchQueries={[{ query: GET_HUBS, variables: this.state.queryVariables }]}>
           {(deleteHubs, { loading, error }) => (
-            <React.Fragment>
+            <Fragment>
               <button onClick={deleteHubs}>Delete Hubs</button>
               {loading && <p>Deleting Hubs....</p>}
               {error && <p style={{ color: 'red' }}> Error: {error} :( Please try again</p>}
-            </React.Fragment>
+            </Fragment>
           )}
         </Mutation>
         <h2>Query Controls</h2>
@@ -226,7 +226,7 @@ class App extends Component {
             if (loading) return <h1>Loading....</h1>
             if (error) return <h1 style={{ color: 'red' }}>Error loading hubs</h1>
             return (
-              <React.Fragment>
+              <Fragment>
                 <h1>Query Results</h1>
                 <table>
                   <thead>
@@ -260,17 +260,17 @@ class App extends Component {
                         <td>{hub.iata}</td>
                         <td>{hub.lat}</td>
                         <td>{hub.lng}</td>
-                        <td><a href={`https://www.google.com/maps/search/?api=1&query=${hub.lat},${hub.lng}`} target="_blank" rel="noopener noreferrer">View On Map</a></td>
+                        <td>{(hub.lat && hub.lng && <a href={`https://www.google.com/maps/search/?api=1&query=${hub.lat},${hub.lng}`} target="_blank" rel="noopener noreferrer">View On Map</a>) || 'No map :('}</td>
                         <td>{hub.remarks}</td>
                       </tr >
                     ))}
                   </tbody >
                 </table >
-              </React.Fragment >
+              </Fragment >
             );
           }}
         </Query >
-      </React.Fragment >
+      </Fragment >
     );
   }
 }
