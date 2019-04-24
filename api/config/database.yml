@@ -81,6 +81,7 @@ test:
 production:
   <<: *default
   database: hub-finder-api_production
-  username: hub-finder-api
+  username: superuser
+  host: localhost
   pool: 5
   password: <%= ENV['HUB_FINDER_API_DATABASE_PASSWORD'] %>
