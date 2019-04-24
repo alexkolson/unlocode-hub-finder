@@ -4,7 +4,7 @@ import ApolloClient, { gql } from 'apollo-boost';
 import { Query, Mutation } from 'react-apollo';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3000/graphql',
+  uri: 'http://api.itsmycargo.saddleside.com/graphql',
 });
 
 const DELETE_HUBS = gql`
