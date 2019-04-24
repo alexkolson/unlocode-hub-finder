@@ -83,4 +83,4 @@ production:
   database: hub-finder-api_production
   username: hub-finder-api
   pool: 5
-  password: <%= ENV['HUB-FINDER-API_DATABASE_PASSWORD'] %>
+  password: <%= ENV['HUB_FINDER_API_DATABASE_PASSWORD'] %>
