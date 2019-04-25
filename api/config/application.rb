@@ -23,7 +23,7 @@ module HubFinderApi
 
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'https://itsmycargo.saddleside.com'
+        origins 'localhost:3001'
         resource '*', headers: :any, methods: [:post, :options]
       end
     end
