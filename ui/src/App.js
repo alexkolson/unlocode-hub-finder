@@ -157,7 +157,7 @@ class App extends Component {
         <Mutation mutation={POPULATE_HUBS} client={client} refetchQueries={[{ query: GET_HUBS, variables: this.state.queryVariables }]}>
           {(populateHubs, { loading, error }) => (
             <Fragment>
-              <button onClick={populateHubs}>Populate Hubs</button>
+              <button onClick={populateHubs} disabled={loading}>Populate Hubs</button>
               {loading && <p>Populating Hubs...This could take some time. This message will disappear when hubs are populated. You will also then see data in the table below.</p>}
               {error && <p style={{ color: 'red' }}> Error: {error} :( Please try again</p>}
             </Fragment>
@@ -166,7 +166,7 @@ class App extends Component {
         <Mutation mutation={DELETE_HUBS} client={client} refetchQueries={[{ query: GET_HUBS, variables: this.state.queryVariables }]}>
           {(deleteHubs, { loading, error }) => (
             <Fragment>
-              <button onClick={deleteHubs}>Delete Hubs</button>
+              <button onClick={deleteHubs} disabled={loading}>Delete Hubs</button>
               {loading && <p>Deleting Hubs....</p>}
               {error && <p style={{ color: 'red' }}> Error: {error} :( Please try again</p>}
             </Fragment>
